@@ -2,7 +2,10 @@ const Discord = require('discord.js')
 const bot = new Discord.Client();
 const limit = 50
 
-const token = 'NzA2NDE1NDkwMTc1ODYwNzM3.Xq56vA.h19cNSvqrwyMGXLAabQ3qwxriIA';
+const dotenv = require("dotenv")
+dotenv.config()
+
+const token = process.env.TOKEN;
 
 const prefix = '!';
 
