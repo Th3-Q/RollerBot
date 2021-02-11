@@ -23,7 +23,6 @@ bot.on('message', function (message) {
             var _a = args[1].split('d'), lValue = _a[0], rValue_1 = _a[1];
             lValue = parseInt(lValue);
             rValue_1 = parseInt(rValue_1);
-            console.log(lValue, rValue_1, limit, lValue < limit, rValue_1 < limit);
             if (!lValue || !rValue_1) {
                 message.channel.send('Error, the roll you entered does not fufil the roll requirements. \nType **!help** for a list of commands or **!info** on how to format the command correctly');
                 break;
@@ -33,9 +32,6 @@ bot.on('message', function (message) {
                 break;
             }
             var diceResults = Array.from({ length: lValue }, function (_, i) { return Math.round(Math.random() * rValue_1); });
-            // for(let i = 0; lValue > i; i++){
-            //     diceResults.push(Math.round(Math.random() * rValue))
-            // }   
             message.channel.send(diceResults);
             break;
         case 'limit':
