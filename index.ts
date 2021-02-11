@@ -1,4 +1,4 @@
-import { Client, DMChannel } from "discord.js"
+import { Client, DMChannel, MessageEmbed } from "discord.js"
 const bot = new Client();
 const limit = 50
 
@@ -38,7 +38,15 @@ bot.on('message', message =>{
 
             let diceResults = Array.from({ length: lValue }, (_, i) => Math.round(Math.random() * rValue));
 
-            message.channel.send(diceResults);
+            const embed = new MessageEmbed()
+                .setColor("#7289da")
+                // .setThumbnail(message.author.avatarURL())
+                .setDescription(`Dice Roll: ${args[1]}`)
+                .addField("Rolls", diceResults.join(), true)
+                .addField("Total", diceResults.reduce((total, curr) => total + curr), true)
+                .setFooter(`for ${message.author.username}    -    ${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`)
+
+            message.channel.send(embed);
             break;
         case 'limit':
             message.channel.send('The limit for the amount of dice that can be rolled is ' + limit)

@@ -32,7 +32,14 @@ bot.on('message', function (message) {
                 break;
             }
             var diceResults = Array.from({ length: lValue }, function (_, i) { return Math.round(Math.random() * rValue_1); });
-            message.channel.send(diceResults);
+            var embed = new discord_js_1.MessageEmbed()
+                .setColor("#7289da")
+                // .setThumbnail(message.author.avatarURL())
+                .setDescription("Dice Roll: " + args[1])
+                .addField("Rolls", diceResults.join(), true)
+                .addField("Total", diceResults.reduce(function (total, curr) { return total + curr; }), true)
+                .setFooter("for " + message.author.username + "    -    " + new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear() + " " + new Date().getHours() + ":" + new Date().getMinutes());
+            message.channel.send(embed);
             break;
         case 'limit':
             message.channel.send('The limit for the amount of dice that can be rolled is ' + limit);
